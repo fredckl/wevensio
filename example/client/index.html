@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
+</head>
+<body>
+  <div id="count">22</div>
+    <div id="app">dsds</div>
+  <script>
+    const socket = io('http://localhost:5001', {
+      extraHeaders: {
+        Authorization: 'Basic dXNlcjpwd2Q='
+      }
+    });
+    const data = [];
+    socket.on('connected', () => {
+        console.log('Connected to sockets');
+        socket.emit('subscribe.default');
+    });
+
+    socket.on('on_add_user', (event) => {
+        console.log('Message from socket server');
+        console.log(event);
+        data.push(JSON.parse(event).data.name);
+        format();
+    });
+    function format() {
+        let elm = document.querySelector('#app')
+        elm.innerHTML = data.join(' ')
+        document.querySelector('#count').textContent = data.length
+    }
+
+    // socket.disconnect();
+  </script>
+</body>
+</html>

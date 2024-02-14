@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+    wevensio:
+        build: .
+
+        ports:
+            - 5001:5001
+
+        entrypoint: [ "npm", "run", "dev" ]
+
+        environment:
+            - PORT=5001
+            - SUBSCRIBE=subscribe.test
+            - CHANNELS=laravel_database_test-push
+            - SOCKET_IO_CORS_ORIGIN=*
+            - REDIS_URL=redis://cache:6379
+
+        volumes:
+            - ./:/service
+
+        networks:
+            - wevensio
+
+        # env_file:
+        #     - path: ./.env
+        #       required: true # default
+
+    cache:
+        image: redis/redis-stack:latest
+        restart: always
+        ports:
+            - '6379:6379'
+            - '8001:8001'
+        volumes:
+            - cache:/data
+
+        networks:
+            - wevensio
+
+volumes:
+  cache:
+    driver: local
+
+networks:
+    wevensio:
+        driver: bridge

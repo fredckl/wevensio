@@ -2,7 +2,10 @@ version: '3.8'
 
 services:
     wevensio:
-        build: .
+        build: 
+            context: .
+            args: 
+                - NODE_ENV=development
 
         ports:
             - 5001:5001
@@ -10,14 +13,15 @@ services:
         entrypoint: [ "npm", "run", "dev" ]
 
         environment:
+            - NODE_ENV=development
             - PORT=5001
-            - SUBSCRIBE=subscribe.test
-            - CHANNELS=laravel_database_test-push
+            - SUBSCRIBE=subscribe.default
+            - CHANNELS=on_add_user
             - SOCKET_IO_CORS_ORIGIN=*
             - REDIS_URL=redis://cache:6379
 
         volumes:
-            - ./:/service
+            - ./src:/service/src
 
         networks:
             - wevensio

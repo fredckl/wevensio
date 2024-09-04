@@ -37,17 +37,17 @@ On your front end application
 
 ```html
 <script>
-    const socket = io('http://localhost:5001');
-    socket.on('connected', () => {
-      socket.emit('subscribe.test'); // ← Choose your subscribe name
-    });
+  const socket = io("http://localhost:5001");
+  socket.on("connected", () => {
+    socket.emit("subscribe.test"); // ← Choose your subscribe name
+  });
 
-    socket.on('on_add_user', (event) => {
-      console.log(event)
-    });
+  socket.on("on_add_user", (event) => {
+    console.log(event);
+  });
 
-    // socket.disconnect();
-  </script>
+  // socket.disconnect();
+</script>
 ```
 
 ## Develop with Docker compose
@@ -69,3 +69,11 @@ Use
 ```shell
 docker run -p 5001:5001 --env-file .env --name wesensio wesensio -v ./logs:/service/logs
 ```
+
+### Redis
+
+Go to Redis Web interface
+
+[http://http://localhost:8001/redis-stack/pub-sub](http://localhost:8001/redis-stack/pub-sub)
+
+click to subscribe and add message on channel on_add_user

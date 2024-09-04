@@ -6,8 +6,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
 </head>
 <body>
-  <div id="count">22</div>
-    <div id="app">dsds</div>
+  <div id="count"></div>
+    <div id="app"></div>
+
+    <form onsubmit="onSave" id="form">
+      <input type="text" id="name">
+      <button type="submit">Submit</button>
+    </form>
+    </div>
   <script>
     const socket = io('http://localhost:5001', {
       extraHeaders: {
@@ -22,14 +28,21 @@
 
     socket.on('on_add_user', (event) => {
         console.log('Message from socket server');
-        console.log(event);
-        data.push(JSON.parse(event).data.name);
+        data.push(event);
         format();
     });
     function format() {
         let elm = document.querySelector('#app')
-        elm.innerHTML = data.join(' ')
-        document.querySelector('#count').textContent = data.length
+        elm.innerHTML = data.join('<br />')
+    }
+
+    document.querySelector('#form').addEventListener('submit', onSave)
+
+    function onSave(e) {
+      e.preventDefault()
+      const value = document.querySelector('#name').value
+      socket.emit('on_add_user', value)
+      document.querySelector('#name').value = ''
     }
 
     // socket.disconnect();

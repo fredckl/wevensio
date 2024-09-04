@@ -56,6 +56,8 @@ On your front end application
 docker-compose up -d
 ```
 
+Open file example/client for test
+
 ## Docker
 
 Build

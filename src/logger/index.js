@@ -14,7 +14,7 @@ const errorTransport = new DailyRotateFile({
 })
 
 const combinedTransport = new DailyRotateFile({
-  filename: `logs/${config('name')}-%DATE%.log`,
+  filename: `logs/${config('app.name')}-%DATE%.log`,
   zippedArchive: true,
   maxSize: '20m',
   maxFiles: '14d'

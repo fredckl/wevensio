@@ -26,7 +26,7 @@ io.on('connection', async (socket) => {
     map(channel => {
       logger.info(`Client subscribe to ${channel}`)
       subscriber.subscribe(channel, (message, channel) => {
-        socket.emit(channel, message)
+        socket.broadcast.emit(channel, message)
       })
 
       socket.on(channel, (message) => {

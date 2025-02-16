@@ -2,9 +2,9 @@ version: '3.8'
 
 services:
     wevensio:
-        build: 
+        build:
             context: .
-            args: 
+            args:
                 - NODE_ENV=development
 
         ports:
@@ -19,9 +19,13 @@ services:
             - CHANNELS=on_add_user
             - SOCKET_IO_CORS_ORIGIN=*
             - REDIS_URL=redis://cache:6379
+            - SSL_KEY=ssl/key.pem
+            - SSL_CERT=ssl/cert.pem
 
         volumes:
             - ./src:/service/src
+            - ./ssl:/service/ssl
+            - ./logs:/service/logs
 
         networks:
             - wevensio

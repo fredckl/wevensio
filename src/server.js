@@ -3,23 +3,15 @@ const express = require('express')
 const app = express()
 const routes = require('./routes')
 const http = require('node:http')
-const { readFileSync } = require('fs')
 const { initSocket } = require('./socket')
 
-const server = http.createServer({
-  key: readFileSync(config('ssl.key')),
-  cert: readFileSync(config('ssl.cert'))
-}, app)
+const httpServer = http.createServer(app)
 
 app.use(express.json())
 app.use('/', routes)
 
-initSocket(server, {
-  cors: {
-    origin: config('socket.cors')
-  }
-})
+initSocket(httpServer)
 
-server.listen(config('app.port'))
+httpServer.listen(config('app.port'))
 
-module.exports = server
+module.exports = httpServer

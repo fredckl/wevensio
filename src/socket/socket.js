@@ -5,7 +5,7 @@ const logger = require('../logger')
 const authenticate = require('./authenticate')
 const getClient = require('../datastores')
 
-const initSocket = (server, options) => {
+const initSocket = (server, options = {}) => {
   const opts = compose(
     removeNilOrEmpty,
     mergeDeepRight({

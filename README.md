@@ -18,7 +18,7 @@ Complet `.env` file
 NODE_ENV=production
 PORT=5001
 SUBSCRIBE=subscribe.test
-CHANNELS=on_add_user
+CHANNELS=message
 SOCKET_IO_CORS_ORIGIN=*
 REDIS_URL=redis://host.docker.internal:6379
 ```
@@ -42,7 +42,7 @@ On your front end application
     socket.emit("subscribe.test"); // ← Choose your subscribe name
   });
 
-  socket.on("on_add_user", (event) => {
+  socket.on("message", (event) => {
     console.log(event);
   });
 
@@ -78,4 +78,4 @@ Go to Redis Web interface
 
 [http://http://localhost:8001/redis-stack/pub-sub](http://localhost:8001/redis-stack/pub-sub)
 
-click to subscribe and add message on channel on_add_user
+click to subscribe and add message on channel message

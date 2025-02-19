@@ -79,3 +79,9 @@ Go to Redis Web interface
 [http://http://localhost:8001/redis-stack/pub-sub](http://localhost:8001/redis-stack/pub-sub)
 
 click to subscribe and add message on channel message
+
+## Run commands CLI
+
+```shell
+./commands.js
+```

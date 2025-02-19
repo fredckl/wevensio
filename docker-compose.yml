@@ -26,6 +26,7 @@ services:
             - ./src:/service/src
             - ./ssl:/service/ssl
             - ./logs:/service/logs
+            - ./config:/service/config
 
         networks:
             - wevensio

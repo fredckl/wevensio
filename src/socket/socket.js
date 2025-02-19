@@ -17,6 +17,10 @@ const initSocket = (server, options = {}) => {
   io.use(authenticate)
 
   io.on('connection', async (socket) => {
+    socket.use(([event, ...args], next) => {
+      console.log({ event, args })
+      next()
+    })
     const subscriber = getClient('redis')
     const pub = subscriber.duplicate()
     await subscriber.connect()
